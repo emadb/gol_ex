@@ -50,6 +50,8 @@ defmodule CellTest do
 
     pid = GolEx.CellRegistry.get_pid({93, 94})
 
+    IO.inspect pid, label: ">>>"
+
     assert Process.alive?(pid) == true
   end
 
