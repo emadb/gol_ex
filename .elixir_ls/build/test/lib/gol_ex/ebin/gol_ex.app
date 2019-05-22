@@ -1,0 +1,9 @@
+{application,gol_ex,
+             [{applications,[kernel,stdlib,elixir,logger]},
+              {description,"gol_ex"},
+              {modules,['Elixir.GolEx','Elixir.GolEx.Application',
+                        'Elixir.GolEx.Cell','Elixir.GolEx.CellRegistry',
+                        'Elixir.GolEx.World']},
+              {registered,[]},
+              {vsn,"0.1.0"},
+              {mod,{'Elixir.GolEx.Application',[]}}]}.
