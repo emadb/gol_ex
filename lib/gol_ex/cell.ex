@@ -1,8 +1,9 @@
 defmodule GolEx.Cell do
   use GenServer
 
-  def init(_) do
-    {:ok, %{age: 0}}
+  def init(pos) do
+    Process.flag(:trap_exit, true)
+    {:ok, %{age: 0, position: pos}}
   end
 
   def start_link(pos) do
@@ -31,11 +32,16 @@ defmodule GolEx.Cell do
   end
 
   def handle_call(:tick, _, state) do
-    {:reply, :ok, %{age: state.age + 1}}
+    {:reply, :ok, %{state | age: state.age + 1}}
   end
 
   def handle_call(:get_age, _, state) do
     {:reply, {:ok, state.age}, state}
+  end
+
+  def terminate(_reason, state) do
+    GolEx.CellRegistry.unregister(state.position)
+    state
   end
 
 end

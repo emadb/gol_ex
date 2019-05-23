@@ -40,16 +40,16 @@ defmodule Simulator do
     GolEx.CellRegistry.get_all_cells()
   end
 
-  def start_simulation_random() do
+  def start_simulation_random(n) do
 
-    1..1000
+    1..n
       |> Enum.map(fn _ -> { Enum.random(1..100), Enum.random(1..100) } end)
       |> Enum.uniq
       |> Enum.map(fn cell -> GolEx.World.create_cell(cell) end)
 
     IO.inspect Enum.count(GolEx.CellRegistry.get_all_cells()), label: "Tick 0"
 
-    1..1000
+    1..n
       |> Enum.map(fn t ->
         GolEx.God.tick()
         IO.inspect Enum.count(GolEx.CellRegistry.get_all_cells()), label: "Tick #{t}"

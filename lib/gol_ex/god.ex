@@ -73,8 +73,11 @@ defmodule GolEx.God do
     tick_dead_cell(cell, neighbours)
   end
 
-  defp tick_live_cell(cell, neighbours) when neighbours == 3, do: {:live, cell}
-  defp tick_live_cell(cell, neighbours) when neighbours == 2, do: {:live, cell}
+  defp tick_live_cell(cell, neighbours) when neighbours == 3 or neighbours == 2 do
+    GolEx.Cell.tick(cell)
+    {:live, cell}
+  end
+
   defp tick_live_cell(cell, neighbours) when neighbours < 2, do: {:kill, cell}
   defp tick_live_cell(cell, neighbours) when neighbours > 3, do: {:kill, cell}
 

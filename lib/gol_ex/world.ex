@@ -10,14 +10,11 @@ defmodule GolEx.World do
   end
 
   def create_cell(pos) do
-    {:ok, pid} = DynamicSupervisor.start_child(__MODULE__, {GolEx.Cell, pos})
-
-    {:ok, pid}
+    DynamicSupervisor.start_child(__MODULE__, {GolEx.Cell, pos})
   end
 
   def kill(cell) do
     pid = GolEx.CellRegistry.get_pid(cell)
-    GolEx.CellRegistry.unregister(cell)
     DynamicSupervisor.terminate_child(__MODULE__, pid)
   end
 

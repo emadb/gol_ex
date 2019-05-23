@@ -5,7 +5,7 @@ defmodule GolEx.Application do
     children = [
       {GolEx.CellRegistry, %{}},
       {GolEx.God, []},
-      Supervisor.child_spec({GolEx.World, []}, id: World),
+      {GolEx.World, []},
     ]
 
     opts = [strategy: :one_for_one, name: GolEx.Supervisor]
