@@ -21,8 +21,10 @@ defmodule GolEx.God do
     live_cells_result = evaluate_live_cells(cells)
     dead_cells_result = evaluate_dead_cells({max_x + 1, max_y + 1})
 
-    kill_cells(live_cells_result ++ dead_cells_result)
-    create_cells(live_cells_result ++ dead_cells_result)
+    all_cells = live_cells_result ++ dead_cells_result
+
+    kill_cells(all_cells)
+    create_cells(all_cells)
 
     new_state = %{tick: state.tick + 1}
     {:reply, :ok, new_state}
@@ -41,10 +43,10 @@ defmodule GolEx.God do
   end
 
   defp get_world_edges(cells) do
-    cells
-    |> Enum.reduce({0, 0}, fn {x, y}, {mx, my} ->
-        {(if x > mx, do: x, else: mx), (if y > my, do: y, else: my)}
-      end)
+    {max_x, _} = Enum.max_by(cells, fn {x, _} -> x end, fn -> {0, 0} end)
+    {_, max_y} = Enum.max_by(cells, fn {_, y} -> y end, fn -> {0, 0} end)
+
+    {max_x, max_y}
   end
 
   defp evaluate_live_cells(cells) do

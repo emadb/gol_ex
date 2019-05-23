@@ -33,13 +33,13 @@ defmodule CellRegistryTest do
     GolEx.CellRegistry.register({2, 3}, "foo_2_3")
     GolEx.CellRegistry.register({3, 3}, "foo_2_3")
     GolEx.CellRegistry.register({4, 3}, "foo_2_3")
-    Enum.count(GolEx.CellRegistry.get_all_pids()) == 3
+    assert Enum.count(GolEx.CellRegistry.get_all_pids()) == 3
   end
 
   test "Get all cells" do
     GolEx.CellRegistry.register({2, 3}, "foo_2_3")
     GolEx.CellRegistry.register({3, 3}, "foo_2_3")
-    Enum.count(GolEx.CellRegistry.get_all_pids()) == 2
+    assert Enum.count(GolEx.CellRegistry.get_all_pids()) == 2
   end
 
   test "Alive. It is alive" do
