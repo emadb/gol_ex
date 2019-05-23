@@ -17,6 +17,7 @@ defmodule GolEx.World do
 
   def kill(cell) do
     pid = GolEx.CellRegistry.get_pid(cell)
+    GolEx.CellRegistry.unregister(cell)
     DynamicSupervisor.terminate_child(__MODULE__, pid)
   end
 
