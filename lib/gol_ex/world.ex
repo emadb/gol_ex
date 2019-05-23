@@ -11,7 +11,7 @@ defmodule GolEx.World do
 
   def create_cell(pos) do
     {:ok, pid} = DynamicSupervisor.start_child(__MODULE__, {GolEx.Cell, pos})
-    GolEx.CellRegistry.register(pos, pid)
+
     {:ok, pid}
   end
 
