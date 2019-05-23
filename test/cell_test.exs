@@ -3,7 +3,7 @@ defmodule CellTest do
 
   test "Any live cell with fewer than two live neighbours dies, as if caused by underpopulation." do
     {:ok, pid} = GolEx.World.create_cell({53, 54})
-    GolEx.World.tick
+    GolEx.God.tick
     assert Process.alive?(pid) == false
   end
 
@@ -15,7 +15,7 @@ defmodule CellTest do
     GolEx.World.create_cell({63, 65})
     GolEx.World.create_cell({63, 63})
 
-    GolEx.World.tick
+    GolEx.God.tick
     assert Process.alive?(pid) == false
   end
 
@@ -25,7 +25,7 @@ defmodule CellTest do
     GolEx.World.create_cell({72, 74})
     GolEx.World.create_cell({72, 73})
 
-    GolEx.World.tick
+    GolEx.God.tick
     assert Process.alive?(pid) == true
   end
 
@@ -36,7 +36,7 @@ defmodule CellTest do
     GolEx.World.create_cell({82, 83})
     GolEx.World.create_cell({83, 85})
 
-    GolEx.World.tick
+    GolEx.God.tick
     assert Process.alive?(pid) == true
   end
 
@@ -46,11 +46,9 @@ defmodule CellTest do
     GolEx.World.create_cell({92, 93})
     GolEx.World.create_cell({93, 95})
 
-    GolEx.World.tick
+    GolEx.God.tick
 
     pid = GolEx.CellRegistry.get_pid({93, 94})
-
-    IO.inspect pid, label: ">>>"
 
     assert Process.alive?(pid) == true
   end

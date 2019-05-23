@@ -10,6 +10,7 @@ defmodule GolEx.Application do
     children = [
       # Supervisor.child_spec({Registry, [keys: :unique, name: GolEx.DefaultRegistry]}, id: :cell_registry),
       {GolEx.CellRegistry, %{}},
+      {GolEx.God, []},
       Supervisor.child_spec({GolEx.World, []}, id: World),
     ]
 
