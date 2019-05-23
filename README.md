@@ -9,3 +9,13 @@ You start with a two dimensional grid of cells, where each cell is either alive 
    3. Any live cell with two or three live neighbours lives on to the next generation.
    4. Any dead cell with exactly three live neighbours becomes a live cell.
 You should write a program that can accept an arbitrary grid of cells, and will output a similar grid showing the next generation.
+
+```
+# on the server
+iex --sname gol --cookie ema -S mix
+```
+
+```
+# on the client
+iex --sname client --remsh gol@macbookpro --cookie ema
+```
