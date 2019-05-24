@@ -10,12 +10,17 @@ defmodule GolEx.World do
   end
 
   def create_cell(pos) do
-    DynamicSupervisor.start_child(__MODULE__, {GolEx.Cell, pos})
+    # worker(Stackgen, [], [id: unique_name, restart: :transient])
+    DynamicSupervisor.start_child(__MODULE__, %{
+      id: pos,
+      start: {GolEx.Cell, :start_link, [pos]},
+      restart: :transient
+    })
   end
 
-  def kill(cell) do
-    pid = GolEx.CellRegistry.get_pid(cell)
-    DynamicSupervisor.terminate_child(__MODULE__, pid)
-  end
+  # def kill(cell) do
+  #   pid = GolEx.CellRegistry.get_pid(cell)
+  #   DynamicSupervisor.terminate_child(__MODULE__, pid)
+  # end
 
 end

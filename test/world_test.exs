@@ -1,5 +1,5 @@
 defmodule WorldTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: false
 
   test "Any live cell with fewer than two live neighbours dies, as if caused by underpopulation." do
     {:ok, pid} = GolEx.World.create_cell({53, 54})

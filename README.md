@@ -19,8 +19,3 @@ iex --sname gol --cookie ema -S mix
 # on the client
 iex --sname client --remsh gol@macbookpro --cookie ema
 ```
-
-
-TODO:
-- Add age to cells
-- Should the cells register/unregister itself?

@@ -9,7 +9,7 @@ defmodule Simulator do
     GolEx.World.create_cell({4, 3})
     GolEx.World.create_cell({5, 3})
 
-    Enum.each(1..10, fn _ -> GolEx.God.tick end)
+    Enum.each(1..100, fn _ -> GolEx.God.tick end)
 
     GolEx.CellRegistry.get_all_cells()
   end
@@ -21,7 +21,7 @@ defmodule Simulator do
     GolEx.World.create_cell({2, 3})
     GolEx.World.create_cell({3, 3})
 
-    Enum.each(1..10, fn _ -> GolEx.God.tick end)
+    Enum.each(1..100, fn _ -> GolEx.God.tick end)
 
     GolEx.CellRegistry.get_all_cells()
   end
