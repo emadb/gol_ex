@@ -21,7 +21,7 @@ defmodule CellTest do
     assert GolEx.CellRegistry.alive?(cell) == false
   end
 
-  test "apply_tick should kill the cell" do
+  test "apply_tick to a cell with two nieghbours should live the cell" do
     cell = {93, 9}
     GolEx.Cell.start_link(cell)
     GolEx.Cell.start_link({94, 9})
