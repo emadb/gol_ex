@@ -10,7 +10,6 @@ defmodule GolEx.World do
   end
 
   def create_cell(pos) do
-    # worker(Stackgen, [], [id: unique_name, restart: :transient])
     DynamicSupervisor.start_child(__MODULE__, %{
       id: pos,
       start: {GolEx.Cell, :start_link, [pos]},

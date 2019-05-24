@@ -1,5 +1,6 @@
 defmodule GolEx.Cell do
   use GenServer
+  alias GolEx.CellRegistry
 
   def init(pos) do
     Process.flag(:trap_exit, true)
@@ -8,27 +9,27 @@ defmodule GolEx.Cell do
 
   def start_link(pos) do
     {:ok, pid} = GenServer.start_link(__MODULE__, pos, name: {:global, pos})
-    GolEx.CellRegistry.register(pos, pid)
+    CellRegistry.register(pos, pid)
     {:ok, pid}
   end
 
   def alive?(pos) do
-    pid = GolEx.CellRegistry.get_pid(pos)
+    pid = CellRegistry.get_pid(pos)
     GenServer.call(pid, :alive)
   end
 
   def tick(pos) do
-    pid = GolEx.CellRegistry.get_pid(pos)
+    pid = CellRegistry.get_pid(pos)
     GenServer.call(pid, :tick)
   end
 
   def apply_tick(pos) do
-    pid = GolEx.CellRegistry.get_pid(pos)
+    pid = CellRegistry.get_pid(pos)
     GenServer.call(pid, :apply_tick)
   end
 
   def get_age(pos) do
-    pid = GolEx.CellRegistry.get_pid(pos)
+    pid = CellRegistry.get_pid(pos)
     GenServer.call(pid, :get_age)
   end
 
@@ -56,7 +57,7 @@ defmodule GolEx.Cell do
   end
 
   def terminate(_reason, state) do
-    GolEx.CellRegistry.unregister(state.position)
+    CellRegistry.unregister(state.position)
     state
   end
 
