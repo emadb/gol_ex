@@ -13,6 +13,12 @@ defmodule CellTest do
     assert GolEx.Cell.get_age({73, 8}) == {:ok, 1}
   end
 
+  test "can have negative position" do
+    GolEx.Cell.start_link({-3, -8})
+    GolEx.Cell.tick({-3, -8})
+    assert GolEx.Cell.get_age({-3, -8}) == {:ok, 1}
+  end
+
   test "apply_tick should kill the cell" do
     cell = {83, 8}
     GolEx.Cell.start_link(cell)

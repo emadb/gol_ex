@@ -17,8 +17,8 @@ defmodule GolEx.God do
     cells = GolEx.CellRegistry.get_all_cells()
     evaluate_live_cells(cells)
 
-    {max_x, max_y} = GolEx.Utils.get_world_edges(cells)
-    dead_cells = evaluate_dead_cells({max_x + 1, max_y + 1})
+    {{min_x, min_y}, {max_x, max_y}} = GolEx.Utils.get_world_edges(cells)
+    dead_cells = evaluate_dead_cells({min_x - 1, min_y - 1}, {max_x + 1, max_y + 1})
 
     apply_tick(cells)
     create_new_cells(dead_cells)
@@ -41,8 +41,8 @@ defmodule GolEx.God do
     Enum.map(cells, &GolEx.Cell.tick/1)
   end
 
-  defp evaluate_dead_cells({mx, my}) do
-    (for i <- 0..mx, j <- 0..my, do:  {i, j})
+  defp evaluate_dead_cells({min_x, min_y}, {max_x, max_y}) do
+    (for i <- min_x..max_x, j <- min_y..max_y, do:  {i, j})
       |> Enum.reject(&GolEx.CellRegistry.alive?/1)
       |> Enum.map(&tick_dead_cell/1)
   end

@@ -3,7 +3,10 @@ defmodule GolEx.Utils do
     {max_x, _} = Enum.max_by(cells, fn {x, _} -> x end, fn -> {0, 0} end)
     {_, max_y} = Enum.max_by(cells, fn {_, y} -> y end, fn -> {0, 0} end)
 
-    {max_x, max_y}
+    {min_x, _} = Enum.min_by(cells, fn {x, _} -> x end, fn -> {0, 0} end)
+    {_, min_y} = Enum.min_by(cells, fn {_, y} -> y end, fn -> {0, 0} end)
+
+    {{min_x, min_y}, {max_x, max_y}}
   end
 
   def count_neighbours({x, y}) do
