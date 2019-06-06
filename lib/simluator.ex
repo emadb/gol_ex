@@ -1,5 +1,28 @@
 defmodule Simulator do
 
+  def infinite_grow(ticks) do
+    GolEx.World.create_cell({117, 111})
+    GolEx.World.create_cell({117, 112})
+    GolEx.World.create_cell({118, 112})
+    GolEx.World.create_cell({117, 113})
+
+    GolEx.World.create_cell({115, 112})
+    GolEx.World.create_cell({115, 113})
+    GolEx.World.create_cell({115, 114})
+
+    GolEx.World.create_cell({113, 115})
+    GolEx.World.create_cell({113, 116})
+
+    GolEx.World.create_cell({111, 116})
+
+    for i <- 0..ticks do
+      IO.inspect i, label: ">"
+      GolEx.God.tick
+    end
+
+    GolEx.CellRegistry.get_all_cells()
+  end
+
   def start_simulation_toad() do
     GolEx.World.create_cell({2, 4})
     GolEx.World.create_cell({3, 4})
